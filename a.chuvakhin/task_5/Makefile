@@ -6,9 +6,9 @@ SRC = line_lookup.c
 all: $(TARGET)
 
 $(TARGET): $(SRC)
-line_lookup.c $(CC) $(CFLAGS) -o $(TARGET) $(SRC)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRC)
 
 clean:
-line_lookup.c rm -f $(TARGET)
+	rm -f $(TARGET)
 
 .PHONY: all clean
