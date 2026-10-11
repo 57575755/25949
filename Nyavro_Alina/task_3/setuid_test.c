@@ -4,18 +4,18 @@
 #include <sys/types.h>
 
 static void print_uids(const char *label) { //lable - "before" или "after"
-    printf("--- %s --- Real UID = %d, Effective UID = %d\n",
+    printf("--- %s ---\n Real UID = %d, Effective UID = %d\n",
            label, getuid(), geteuid());
 }
 
 static void try_open(const char *label) {
     FILE *f = fopen("data.txt", "r");
     if (f == NULL) {
-        printf("--- %s --- fopen(data.txt) FAILED: ", label);
+        printf("--- %s ---\nfopen(data.txt) FAILED: ", label);
         perror("");
     } 
     else {
-        printf("--- %s --- fopen(data.txt) SUCCESS\n", label);
+        printf("--- %s ---\nfopen(data.txt) SUCCESS\n", label);
         fclose(f);
     }
 }
