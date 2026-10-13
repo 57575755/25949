@@ -12,8 +12,3 @@ clean:
 	rm -f $(TARGET)
 
 .PHONY: all clean
-
-Команды для запуска:
-make clean
-make
-./line_lookup_mmap test.txt
