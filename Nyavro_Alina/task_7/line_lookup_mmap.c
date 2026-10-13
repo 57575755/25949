@@ -39,8 +39,8 @@ int main(int argc, char *argv[]) {
     }
 
     struct stat st;
-    if (fstat(fd, &st) == -1) { //узнать размер
-        perror("fstat"); 
+    if (fstat(fd, &st) == -1) {
+        perror("fstat");
         close(fd);
         return 1;
     }
