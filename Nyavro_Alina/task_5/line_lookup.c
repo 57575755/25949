@@ -2,12 +2,30 @@
 #include <stdlib.h>       // malloc, realloc, free, exit
 #include <unistd.h>       // read, lseek, close
 #include <fcntl.h>        // open, O_RDONLY
+#include <sys/types.h>    /* для uid_t, setuid, getuid */
 
 typedef struct {
     long offset;   // Позиция начала строки в файле (байт от начала)
     int length;    // Длина строки (количество символов)
 } LineInfo;
 
+static void print_uids(const char *label) { //lable - "before" или "after"
+    printf("--- %s ---\n Real UID = %d, Effective UID = %d\n",
+           label, getuid(), geteuid());
+}
+
+static void try_open(const char *label) {
+    FILE *f = fopen("test.txt", "r");
+    if (f == NULL) {
+        printf("--- %s ---\nfopen(test.txt) FAILED: ", label);
+        perror("");
+    } 
+    else {
+        printf("--- %s ---\nfopen(test.txt) SUCCESS\n", label);
+        fclose(f);
+    }
+}
+    
 int main(int argc, char *argv[]) {
 
     if (argc != 2) {
@@ -129,6 +147,18 @@ int main(int argc, char *argv[]) {
 
         free(buf);
     }
+    printf("\n=== Task 3: setuid demonstration ===\n");
+    print_uids("before");
+    try_open("before");
+
+    if (setuid(getuid()) == -1) {
+        perror("setuid");
+    } else {
+        printf("setuid(getuid()) succeeded\n");
+    }
+
+    print_uids("after");
+    try_open("after");
     
     free(table);
     close(fd);
