@@ -79,9 +79,8 @@ int main(int argc, char* argv[])
 
     for (int i = 1; i < num_lines+1; i++)
     {
-        printf("%ld %d\n", table[i-1].offset, table[i-1].length);
+        printf("offset: %ld, length: %d, count of bytes: %d\n", table[i-1].offset, table[i-1].length, abs(table[i-1].length - table[i-1].offset));
     }
-
     int num_line;
     while (1){
         printf("Введите номер строки от 1 до %d (0 - выход): ", num_lines);
